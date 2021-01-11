@@ -1,0 +1,10 @@
+{
+	"name": "Ruby and node",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
+	"extensions": [
+		"rebornix.Ruby"
+	],
+	"remoteUser": "vscode"
+}
