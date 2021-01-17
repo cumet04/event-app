@@ -13,5 +13,24 @@ services:
       - ..:/workspace:cached
       - bundle:/usr/local/bundle
     command: sleep infinity 
+    environment:
+      - RAILS_ENV=development
+      - RAILS_DB_HOST=db
+      - RAILS_DB_PORT=3306
+      - RAILS_DB_DATABASE=app
+      - RAILS_DB_USERNAME=root
+      - RAILS_DB_PASSWORD=''
+      - RAILS_REDIS_HOST=redis
+      - RAILS_REDIS_PORT=6379
+      - RAILS_SECRET_KEY_BASE=''
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes:
+      - db:/var/lib/mysql
+  redis:
+    image: redis:6
 volumes:
   bundle:
+  db:
