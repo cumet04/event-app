@@ -3,9 +3,27 @@
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/workspace",
+	"remoteUser": "vscode",
+	"remoteEnv": {
+		"PATH":"/workspace/.devcontainer/bin:${containerEnv:PATH}"
+	},
 	"extensions": [
 		"rebornix.Ruby",
+		"connorshea.vscode-ruby-test-adapter",
 		"dbaeumer.vscode-eslint"
 	],
-	"remoteUser": "vscode"
+	"settings": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll": true
+		},
+		"ruby.useLanguageServer": true,
+		"ruby.format": "rubocop",
+		"ruby.lint": {
+			"rubocop": true
+		},
+		"[ruby]": {
+			"editor.formatOnSave": true,
+		},
+		"remote.autoForwardPorts": false
+	}
 }

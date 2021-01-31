@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# rubocop-daemon用のrubocop実行スクリプト
+
+set -u
+cd $(readlink -f $0 | xargs dirname)
+cd ..
+
+if ! pgrep -f rubocop_daemon.rb >/dev/null; then
+  nohup bundle exec ruby lib/rubocop_daemon.rb &>/tmp/rubocop_daemon.log &
+  sleep 1
+fi
+
+COMMAND=$(echo "$@" | sed "s|$PWD|\.|")
+COMMAND=$(echo "$COMMAND" | sed "s| -a| -A|") # use force fix
+
+# remove quote for filepath, otherwise rubocop can't find .rubocop.yml
+COMMAND=$(echo "$COMMAND" | tr -d \')
+
+# 標準入力を読み取っておく; vscodeは'-s'オプション付きで実行するため
+STDIN_CONTENT="$(cat)"
+
+raw_output=$(printf '%s\n%s\n' "$COMMAND" "$STDIN_CONTENT" | nc -N 127.0.0.1 3001)
+status=$?
+if [ $status -ne 0 ]; then
+  echo "Error on nc command." >&2
+  exit $status
+fi
+
+status=$(echo "$raw_output" | head -n 1)
+echo "$raw_output" | tail -n +2
+
+exit $status
