@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -eu
+cd $(readlink -f $0 | xargs dirname)/../.. # workplace root
+
+echo 'install dev packages:'
+
+echo '[api] npm ci'
+cd api; npm ci; cd ..
+
+echo '[frontend] npm ci'
+cd frontend; npm ci; cd ..
+
+cd backend
+echo '[backend] bundle'; bundle
+echo '[bacnend] db:create db:migrate'; bundle exec rails db:create db:migrate
+cd ..

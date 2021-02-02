@@ -7,6 +7,7 @@
 	"remoteEnv": {
 		"PATH":"/workspace/.devcontainer/bin:${containerEnv:PATH}"
 	},
+	"postCreateCommand": ".devcontainer/bin/initial_setup",
 	"extensions": [
 		"rebornix.Ruby",
 		"connorshea.vscode-ruby-test-adapter",
