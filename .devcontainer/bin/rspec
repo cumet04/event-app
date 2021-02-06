@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -eu
+cd $(readlink -f $0 | xargs dirname)
+
+cd ../../backend
+./bin/rspec $@

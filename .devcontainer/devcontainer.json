@@ -11,6 +11,7 @@
 	"extensions": [
 		"rebornix.Ruby",
 		"connorshea.vscode-ruby-test-adapter",
+		"sporto.rails-go-to-spec",
 		"dbaeumer.vscode-eslint"
 	],
 	"settings": {
@@ -25,6 +26,7 @@
 		"[ruby]": {
 			"editor.formatOnSave": true,
 		},
+		"rubyTestExplorer.rspecCommand": "rspec",
 		"remote.autoForwardPorts": false
 	}
 }
