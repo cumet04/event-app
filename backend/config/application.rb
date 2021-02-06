@@ -11,6 +11,7 @@ require "rails/test_unit/railtie"
 Bundler.require(*Rails.groups)
 
 module Backend
+  # API Server Application
   class Application < Rails::Application
     config.load_defaults 6.1
     config.api_only = true
@@ -21,8 +22,8 @@ module Backend
     config.public_file_server.enabled = false
 
     config.log_level = :info
-    config.log_tags = [ :request_id ]
-    config.logger = ActiveSupport::Logger.new(STDOUT)
+    config.log_tags = [:request_id]
+    config.logger = ActiveSupport::Logger.new($stdout)
     config.log_formatter = ::Logger::Formatter.new
 
     config.active_support.deprecation = :notify
