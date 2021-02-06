@@ -7,8 +7,122 @@ info:
   description: api
 servers:
   - url: /api
-paths: {}
+paths:
+  /users:
+    put:
+      summary: ''
+      operationId: register-user
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  required:
+                    - name
+                    - email
+                    - password
+                  properties:
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    password:
+                      type: string
+              required:
+                - user
+            examples: {}
+      description: register a user
+      tags:
+        - users
+  /users/current:
+    parameters: []
+    get:
+      summary: Your GET endpoint
+      tags:
+        - users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                required:
+                  - user
+      operationId: get-current-user
+      description: get current login user info
+  /users/session:
+    post:
+      summary: ''
+      operationId: login
+      responses:
+        '202':
+          description: Accepted
+      description: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  required:
+                    - email
+                    - password
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+              required:
+                - user
+      tags:
+        - users
+    parameters: []
+    delete:
+      summary: ''
+      operationId: logout
+      responses:
+        '202':
+          description: Accepted
+      description: logout
+      tags:
+        - users
 components:
-  schemas: {}
-tags: 
-  - name: test
+  schemas:
+    User:
+      title: User
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        email:
+          type: string
+          readOnly: true
+      required:
+        - id
+        - name
+        - email
+tags:
+  - name: users
