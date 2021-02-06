@@ -1,0 +1,14 @@
+openapi: 3.0.2
+info:
+  title: API
+  version: 0.0.0
+  contact:
+    name: cumet04
+  description: api
+servers:
+  - url: /api
+paths: {}
+components:
+  schemas: {}
+tags: 
+  - name: test

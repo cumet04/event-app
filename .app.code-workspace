@@ -1,7 +1,15 @@
 {
   "folders": [
     { "path": "." },
+    { "path": "./api" },
     { "path": "./backend" },
     { "path": "./frontend" }
-  ]
+  ],"settings": {
+    "files.exclude": {
+      // hide first-level folders from root
+      "api": true,
+      "backend": true,
+      "frontend": true,
+    }
+  }
 }
