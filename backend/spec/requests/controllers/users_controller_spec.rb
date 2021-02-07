@@ -22,18 +22,35 @@ RSpec.describe "Users", type: :request do
     assert_response :created
   end
 
-  it "get current user" do
-    get users_current_url
-    assert_response :success
+  context "when a user is registered," do
+    before do
+      put users_url, params: { user: new_user_param }
+    end
+
+    it "the user can login" do
+      post users_session_url, params: { user: login_user_param }
+      assert_response :accepted
+    end
   end
 
-  it "login" do
-    post users_session_url, params: { user: login_user_param }
-    assert_response :accepted
-  end
+  context "when the user logged in," do
+    fixtures :users
 
-  it "logout" do
-    delete users_session_url
-    assert_response :accepted
+    before do
+      post users_session_url, params: { user: {
+        email: "one@example.com",
+        password: "Password0"
+      } }
+    end
+
+    it "can get current user info" do
+      get users_current_url
+      assert_response :success
+    end
+
+    it "can logout" do
+      delete users_session_url
+      assert_response :accepted
+    end
   end
 end

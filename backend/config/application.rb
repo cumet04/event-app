@@ -30,5 +30,7 @@ module Backend
     config.active_support.disallowed_deprecation = :log
     config.active_support.disallowed_deprecation_warnings = []
     config.active_record.dump_schema_after_migration = false
+
+    config.session_redis_secure = true # read in initializers/redis.rb
   end
 end

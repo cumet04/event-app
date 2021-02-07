@@ -21,4 +21,11 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
+
+  def self.authenticate(email, password)
+    # user not found for email -> nil
+    # password not match -> false
+    # email/password ok -> User instance
+    find_by(email: email)&.authenticate(password)
+  end
 end

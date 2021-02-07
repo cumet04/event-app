@@ -14,9 +14,12 @@ gem "rails", "~> 6.1.1"
 gem "mysql2", "~> 0.5"
 gem "redis-actionpack"
 
+gem "warden"
+
 group :development, :test do
   gem "committee"
   gem "pry-byebug"
+  gem "ricecream"
 
   gem "rspec-rails"
   gem "spring-commands-rspec"

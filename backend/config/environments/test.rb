@@ -12,4 +12,6 @@ Rails.application.configure do
   config.active_support.disallowed_deprecation = :raise
 
   config.log_level = :warn
+
+  config.session_redis_secure = false
 end

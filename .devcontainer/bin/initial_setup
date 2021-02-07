@@ -13,5 +13,6 @@ cd frontend; npm ci; cd ..
 
 cd backend
 echo '[backend] bundle'; bundle
-echo '[bacnend] db:create db:migrate'; bundle exec rails db:create db:migrate
+echo '[backend] db:reset db:fixtures:load'
+env FIXTURES_PATH="./spec/fixtures" bundle exec rails db:reset db:fixtures:load
 cd ..

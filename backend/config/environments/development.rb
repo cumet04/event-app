@@ -13,4 +13,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = true
 
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  config.session_redis_secure = false
 end

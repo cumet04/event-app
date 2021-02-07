@@ -173,6 +173,7 @@ GEM
       redis (>= 4, < 5)
     regexp_parser (2.0.3)
     rexml (3.2.4)
+    ricecream (0.2.0)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -225,6 +226,8 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.7.0)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -245,11 +248,13 @@ DEPENDENCIES
   rack-cors
   rails (~> 6.1.1)
   redis-actionpack
+  ricecream
   rspec-rails
   rubocop-github!
   rubocop-rspec
   spring
   spring-commands-rspec
+  warden
 
 RUBY VERSION
    ruby 3.0.0p0
