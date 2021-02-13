@@ -62,6 +62,7 @@ function dev({targetDir, webPort, apiPort}) {
       target: `http://localhost:${apiPort}`,
     })
   );
+  app.get('*', (_, res) => res.sendFile(resolve(targetDir, 'index.html')));
   app.listen(webPort);
 
   require('livereload').createServer().watch(targetDir);
