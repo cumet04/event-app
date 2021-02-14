@@ -25,15 +25,26 @@ const buildOpts = {
   },
 };
 
+const buildOptsCss = {
+  file: resolve(srcPath, 'index.scss'),
+  outputStyle: env === 'dev' ? 'expanded' : 'compressed',
+  sourceMap: env === 'dev',
+  sourceMapEmbed: true,
+  outFile: resolve(distPath, 'index.css'),
+};
+
 async function entry() {
   const builder = await esbuild.build(buildOpts);
+  buildCss();
   fs.readdirSync(resolve(publicPath)).forEach(path => {
     fs.copyFileSync(resolve(publicPath, path), resolve(distPath, path));
   });
   if (env !== 'dev') return;
 
-  require('chokidar')
-    .watch(resolve(srcPath))
+  const chokidar = require('chokidar');
+
+  chokidar
+    .watch(resolve(srcPath), {ignored: /index\.scss/})
     .on('change', async () => {
       try {
         await builder.rebuild();
@@ -41,12 +52,18 @@ async function entry() {
         process.stderr.write(`[ERROR]: ${e}\n`);
       }
     });
+  chokidar.watch(resolve(srcPath, 'index.scss')).on('change', buildCss);
 
   dev({
     targetDir: resolve(distPath),
     webPort,
     apiPort,
   });
+}
+
+function buildCss() {
+  const result = require('sass').renderSync(buildOptsCss);
+  fs.writeFileSync(buildOptsCss.outFile, result.css);
 }
 
 function dev({targetDir, webPort, apiPort}) {
